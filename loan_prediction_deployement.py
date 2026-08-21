@@ -14,6 +14,8 @@ import joblib
 
 model = joblib.load("Loan_Prediction_model.pkl")
 encoder_loan = joblib.load("label_encoder_loan (1).pkl")
+st.write(type(encoder_loan))
+st.write(encoder_loan)
 
 st.title("Loan Prediction")
 gender = st.selectbox("Gender",encoder_loan["Gender"].classes_)
@@ -22,9 +24,9 @@ dependents = st.selectbox("Dependents",encoder_loan["Dependents"].classes_)
 education = st.selectbox("Education",encoder_loan["Education"].classes_)
 self_employed = st.selectbox("Self Employed",encoder_loan["Self_Employed"].classes_)
 applicantincome = st.number_input("ApplicantIncome")
-coapplicantincome = st.number_float("CoapplicantIncome")
-loan_amount_term = st.number_float("Loan_Amount_Term")
-credit_history = st.number_float("Credit_History")
+coapplicantincome = st.number_input("CoapplicantIncome")
+loan_amount_term = st.number_input("Loan_Amount_Term")
+credit_history = st.number_input("Credit_History")
 property_area = st.selectbox("Property",encoder_loan["Property_Area"].classes_)
 loan_status = st.selectbox("Loan Status",encoder_loan["Loan_Status"].classes_)
 
