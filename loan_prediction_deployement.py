@@ -23,7 +23,6 @@ education = st.selectbox("Education",encoder["Education"].classes_)
 self_employed = st.selectbox("Self Employed",encoder["Self_Employed"].classes_)
 applicantincome = st.number_input("ApplicantIncome")
 coapplicantincome = st.number_float("CoapplicantIncome")
-loanamount = st.number_float("LoanAmount")
 loan_amount_term = st.number_float("Loan_Amount_Term")
 credit_history = st.number_float("Credit_History")
 property_area = st.selectbox("Property",encoder["Property_Area"].classes_)
@@ -37,7 +36,6 @@ df = pd.DataFrame({
     "Self_Employed" : [self_employed],
     "ApplicantIncome" : [applicantincome],
     "CoapplicantIncome" : [coapplicantincome],
-    "LoanAmount" : [loanamount],
     "Loan_Amount_Term" : [loan_amount_term],
     "Credit_History" : [credit_history],
     "Property_Area" : [property_area],
