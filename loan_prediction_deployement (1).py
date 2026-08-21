@@ -13,7 +13,7 @@ import joblib
 
 # Load model and encoder
 model = joblib.load("Loan_Prediction_model.pkl")
-encoder = joblib.load("label_encoder.pkl")
+encoder = joblib.load("label_encoder_loan.pkl")
 st.write(type(encoder))
 st.write(encoder)
 
