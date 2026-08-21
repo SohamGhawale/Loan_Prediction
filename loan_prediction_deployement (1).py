@@ -9,46 +9,80 @@ Original file is located at
 
 import streamlit as st
 import pandas as pd
-import numpy as np
 import joblib
 
+# Load model and encoder
 model = joblib.load("Loan_Prediction_model.pkl")
-encoder = joblib.load("label_encoder_loan.pkl")
-st.write("Encoder type:", type(encoder))
-st.write("Encoder:", encoder)
+encoder = joblib.load("label_encoder.pkl")
 
 st.title("Loan Prediction")
-gender = st.selectbox("Gender",encoder["Gender"].classes_)
-married = st.selectbox("Married",encoder["Married"].classes_)
-dependents = st.selectbox("Dependents",encoder["Dependents"].classes_)
-education = st.selectbox("Education",encoder["Education"].classes_)
-self_employed = st.selectbox("Self Employed",encoder["Self_Employed"].classes_)
-applicantincome = st.number_input("ApplicantIncome")
-coapplicantincome = st.number_input("CoapplicantIncome")
-loanamount = st.number_input("LoanAmount")
-loan_amount_term = st.number_input("Loan_Amount_Term")
-credit_history = st.number_input("Credit_History")
-property_area = st.selectbox("Property",encoder["Property_Area"].classes_)
-loan_status = st.selectbox("Loan Status",encoder["Loan_Status"].classes_)
 
+# Categorical inputs
+gender = st.selectbox(
+    "Gender",
+    encoder["Gender"].classes_
+)
+
+married = st.selectbox(
+    "Married",
+    encoder["Married"].classes_
+)
+
+dependents = st.selectbox(
+    "Dependents",
+    encoder["Dependents"].classes_
+)
+
+education = st.selectbox(
+    "Education",
+    encoder["Education"].classes_
+)
+
+self_employed = st.selectbox(
+    "Self Employed",
+    encoder["Self_Employed"].classes_
+)
+
+property_area = st.selectbox(
+    "Property Area",
+    encoder["Property_Area"].classes_
+)
+
+# Numerical inputs
+applicantincome = st.number_input("ApplicantIncome", min_value=0.0)
+coapplicantincome = st.number_input("CoapplicantIncome", min_value=0.0)
+loanamount = st.number_input("LoanAmount", min_value=0.0)
+loan_amount_term = st.number_input("Loan_Amount_Term", min_value=0.0)
+credit_history = st.number_input(
+    "Credit_History",
+    min_value=0.0,
+    max_value=1.0
+)
+
+# Create dataframe
 df = pd.DataFrame({
-    "Gender" : [gender],
-    "Married" : [married],
-    "Dependents" : [dependents],
-    "Education" : [education],
-    "Self_Employed" : [self_employed],
-    "ApplicantIncome" : [applicantincome],
-    "CoapplicantIncome" : [coapplicantincome],
-    "LoanAmount" : [loanamount],
-    "Loan_Amount_Term" : [loan_amount_term],
-    "Credit_History" : [credit_history],
-    "Property_Area" : [property_area],
-    "Loan_Status" : [loan_status]
+    "Gender": [gender],
+    "Married": [married],
+    "Dependents": [dependents],
+    "Education": [education],
+    "Self_Employed": [self_employed],
+    "ApplicantIncome": [applicantincome],
+    "CoapplicantIncome": [coapplicantincome],
+    "LoanAmount": [loanamount],
+    "Loan_Amount_Term": [loan_amount_term],
+    "Credit_History": [credit_history],
+    "Property_Area": [property_area]
 })
 
+# Prediction
 if st.button("Predict Loan"):
-    for col in encoder:
-      df[col] = encoder[col].transform(df[col])
 
+    # Encode categorical columns
+    for col in encoder:
+        if col in df.columns:
+            df[col] = encoder[col].transform(df[col])
+
+    # Make prediction
     prediction = model.predict(df)[0]
-    st.success(f"Predicted Loan : {prediction[0]:,.2f}")
+
+    st.success(f"Predicted Loan Status: {prediction}")
