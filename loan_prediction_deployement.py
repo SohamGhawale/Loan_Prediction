@@ -13,7 +13,7 @@ import numpy as np
 import joblib
 
 model = joblib.load("Loan_Prediction_model.pkl")
-encoder = joblib.load("label_encoder_loan.pkl")
+encoder = joblib.load("label_encoder_loan (1).pkl")
 
 st.title("Loan Prediction")
 gender = st.selectbox("Gender",encoder_loan["Gender"].classes_)
