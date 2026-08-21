@@ -30,18 +30,18 @@ property_area = st.selectbox("Property",encoder["Property_Area"].classes_)
 loan_status = st.selectbox("Loan Status",encoder["Loan_Status"].classes_)
 
 df = pd.DataFrame({
-    "Gender" = [gender],
-    "Married" = [married],
-    "Dependents" = [dependents],
-    "Education" = [education],
-    "Self_Employed" = [self_employed],
-    "ApplicantIncome" = [applicantincome],
-    "CoapplicantIncome" = [coapplicantincome],
-    "LoanAmount" = [loanamount],
-    "Loan_Amount_Term" = [loan_amount_term],
-    "Credit_History" = [credit_history],
-    "Property_Area" = [property_area],
-    "Loan_Status" = [loan_status]
+    "Gender" : [gender],
+    "Married" : [married],
+    "Dependents" : [dependents],
+    "Education" : [education],
+    "Self_Employed" : [self_employed],
+    "ApplicantIncome" : [applicantincome],
+    "CoapplicantIncome" : [coapplicantincome],
+    "LoanAmount" : [loanamount],
+    "Loan_Amount_Term" : [loan_amount_term],
+    "Credit_History" : [credit_history],
+    "Property_Area" : [property_area],
+    "Loan_Status" : [loan_status]
 })
 
 if st.button("Predict Loan"):
