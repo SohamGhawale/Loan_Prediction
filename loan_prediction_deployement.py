@@ -75,7 +75,9 @@ if st.button("Predict Loan"):
 
    
     result = target_encoder.inverse_transform(prediction)
-
-    st.success(
-        f"Predicted Loan Status: {result[0]}"
-    )
+    if result[0] == "Y":
+        st.success(
+            f"Predicted Loan Status: Yes")
+    else:
+        st.success(
+            f"Predicted Loan Status: No")
